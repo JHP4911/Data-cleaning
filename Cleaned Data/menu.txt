@@ -96,6 +96,14 @@ ________________________________________________________________________________
 Dish
 
 
+- Upcasting was done on column “id”, “menus_appeared”,”times_appeared”,”lowest_price”, “highest_price” to numeric data type and column “first_appeared” and “last_appeared” to Date type.
 
+-Removed description column due to missing information in it.
+
+-Removed whitespaces in “name” column.
+
+-Changed values is “name” column to titlecase.
+
+-Upcasted the values in “name” to text type.
 
 
