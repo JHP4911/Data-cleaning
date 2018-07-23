@@ -24,14 +24,41 @@ Each MenuItem refers to both the MenuPage it is found on -- via the menu_page_id
 A Dish is a broad category that covers some number of Menu Items. Each dish has a unique id, to which it is referred by its affiliated MenuItems. Each dish also has a name, a description, several menus it appears on, and both date and price ranges.
 
 2.4   Initial Data quality
-_____________________________________________________________________________________________________________________
+From the initial screening, we had a look at the 4 files and following were the observation:
+Dish: - The "description" column seemed to be entirely empty, we looked at some first 5000 records. The "menus_appeared" and "times_appeared" seemed to have reported the data properly with the min value at-least equal to 1 which made sense. The "first_appeared" column seemed to have some unusual values like 1 and there were some dishes with lowest and highest price=0.
+
+Menu: -The "name", "keyword", "language", "location_type" columns is entirely empty, for index between 12583-12698 no data was reported. The "sponsor”, "venue", "places" and "event" had missing values at some places. The "occasion" column had a lot of missing information and at many places it reported occasion as other. The "note" column had values that didn’t make much sense at many places. The "currency" and "currency_symbol" also had a lot of data missing.
+Menu Item: -"price" column had many missing information, "high price" column had mostly empty data.
+Menu Page: -The data was missing for some columns, uuid had data encoded in hexadecimal format which did not prove to be of much use. There was duplicated data.
+The dataset brings with it a bunch of information which must be both cleaned and its validity had to be determined. The data was totally un-normalized and could have violated lot of data constraints.
 
 2.5   Use cases that can be derived from the dataset.
-_____________________________________________________________________________________________________________________
+•	Data about the dishes can be used to visualize the changing food trends.
+•	Identify the effect of the price on the dish popularity.
+•	Popular dishes of all time.
+•	Biggest sponsor of dishes.
+•	Were the dishes being used more for commercial purpose or domestic purpose.
+•	On what occasion did the dishes arrived
+•	Which menu page go the maximum dish popularity.
 
+The dataset opens a bunch of opportunity to be studied and I am sure by doing some EDA we could have achieve a much broader set of use-cases.
 
 3    Data cleaning with open Refine
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+After doing initial screening of the data and identifying possible use cases, we thought of using open refine to perform the cleaning of data. Open Refine (formerly Google Refine) is a powerful tool for working with messy data: cleaning it; transforming it from one format into another; and extending it with web services and external data.
+The following were the cleaning actions performed on each file:
+
+Menu
+•	Checked if “id” column shows only unique value, the operation was performed by sorting the data and then using the blank only option of open refine which showed 0 rows affected, confirming the understanding.
+•	Trim whitespaces from “name” column 9 rows affected.
+•	To title case on “name” column 629 cells affected.
+•	Merged redundant names from name column, 961 cells affected.
+-------Screenshot--------------
+•	Title case on “sponsor” column,8683 cells affected.
+•	Trim spaces on “sponsor” ,14 cells affected.
+•	Cluster values “sponsor” ,3814 cells affected.
+•	Removed event, venue, place, physical_description, occasion, keyword, language, location_type column due to missing information all blank cells.
+•	Applied regular expression on “call_number” to return on the number and remove the “_wotm” text.
+•	-------Screenshot--------------
 
 4    Developing a Relational database schema
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
