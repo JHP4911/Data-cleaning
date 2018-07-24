@@ -15,7 +15,7 @@
 #   @End openRefine_MenuPage 
 
 
-# Sql lite profiling operation
+# Sql lite data loading operation
 #    @Begin LoadingDataIntoDb @desc Use SQLLite commandline utility to load all the files into db. @in Dish_clean.csv @in Menu_clean.csv @in MenuItem_clean.csv @in MenuPage_clean.csv @out Dish_c @out Menu_c @out MenuItem_c @out MenuPage_c
 #    @End  LoadingDataIntoDb
 
